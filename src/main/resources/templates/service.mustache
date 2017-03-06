@@ -1,0 +1,54 @@
+'use strict';
+
+var request = require('request');
+
+{{#operations}}
+{{#operation}}
+exports.{{{operationId}}} = function(headers, operation, args, res, next) {
+  /**
+   {{#summary}}
+   * {{{summary}}}
+   {{/summary}}
+   {{#notes}}
+   * {{{notes}}}
+   {{/notes}}
+   *
+  {{#allParams}}
+   * {{paramName}} {{{dataType}}} {{{description}}}{{^required}} (optional){{/required}}
+  {{/allParams}}
+  {{^returnType}}
+   * no response value expected for this operation
+  {{/returnType}}
+  {{#returnType}}
+   * returns {{{returnType}}}
+  {{/returnType}}
+   **/
+  {{#returnType}}
+
+  var routable = operation['x-swagger-aws-routable-to'];
+  var method = routable.substring(routable.indexOf('[') + 1, routable.indexOf(']'));
+  var url = routable.substring(routable.indexOf(']') + 2);  // TODO use url.parse() here?
+  var authorization = headers['Authorization'.toLowerCase()];
+
+  // TODO pass body
+
+  request({ method: method, url: url, headers: { 'Authorization': authorization } }, function (error, response, body) {
+    console.log(response.statusCode);
+    if (error) {
+      console.log(error);
+      res.end(JSON.stringify(error));
+    } else {
+      console.log(body);
+      res.end(body);
+    }
+  });
+ 
+  {{/returnType}}
+  {{^returnType}}
+  // No return type
+  res.end();
+  {{/returnType}}
+}
+
+{{/operation}}
+{{/operations}}
