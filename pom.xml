@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>solutions.echelon.api</groupId>
+	<artifactId>swagger-codegen-router-template</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>swagger-codegen-router-template</name>
+	<description>
+		A template for swagger-codegen that generates a Node.js project that validates and routes requests to a url.
+	</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<swagger.specification.file>src/main/resources/swagger.yaml</swagger.specification.file>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!-- https://github.com/swagger-api/swagger-codegen/tree/master/modules/swagger-codegen-maven-plugin -->
+			    <groupId>io.swagger</groupId>
+			    <artifactId>swagger-codegen-maven-plugin</artifactId>
+   				<version>2.2.1</version>
+			    <executions>
+			        <execution>
+			    		<id>generate-node-service</id>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>
+			            <configuration>
+			                <inputSpec>${swagger.specification.file}</inputSpec>
+			                <language>nodejs-server</language>
+			                <templateDirectory>src/main/resources/templates</templateDirectory>
+			                <output>${project.build.directory}/generated-sources/swagger</output>
+			                <addCompileSourceRoot>false</addCompileSourceRoot>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>	
+		</plugins>
+	</build>
+
+</project>
