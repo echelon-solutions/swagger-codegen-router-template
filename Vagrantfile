@@ -17,6 +17,8 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "java-maven-build-environment"  
   config.vm.network "private_network", ip: "192.168.33.10"
 
+  config.vm.synced_folder ".", "/project"
+
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "256"
   end
