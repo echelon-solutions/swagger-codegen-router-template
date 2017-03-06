@@ -45,8 +45,8 @@ mvn clean package
 
 ## Support
 
-Please reach out to `support@echelon.solutions` with any questions, 
-concerns, or suggestions.
+Please reach out to [support@echelon.solutions](mailto:support@echelon.solutions) 
+with any questions, concerns, or suggestions.
 
 Also, feel free to clone/fork this project and suggest changes and 
 updates via a "Pull Request".
